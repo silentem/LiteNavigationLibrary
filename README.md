@@ -5,18 +5,28 @@
 2) Add a views to your layout
 
 ```xml
-    <group.icecream.dn8.util.views.lite.LiteGeneralHolder
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="group.icecream.dn8.mvp.general.GeneralActivity">
+
+    <com.whaletail.lite.views.LiteGeneralHolder
         android:id="@+id/lgh_general"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/lbn_general" />
 
-    <group.icecream.dn8.util.views.lite.LiteBottomNavigator
+    <com.whaletail.lite.views.LiteBottomNavigator
         android:id="@+id/lbn_general"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:background="@color/colorBlack" />
+
+</RelativeLayout>
+
         
   ```
   
