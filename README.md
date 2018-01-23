@@ -1,4 +1,4 @@
-# Lite Navigator Library
+# Lite Navigation Library
 
 # How to use
 1) Copy sources to your project
