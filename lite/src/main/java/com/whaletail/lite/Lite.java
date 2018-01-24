@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.util.Pair;
 
+import com.whaletail.lite.listeners.SwitchListener;
 import com.whaletail.lite.views.LiteBottomNavigator;
 import com.whaletail.lite.views.LiteGeneralHolder;
 
@@ -20,7 +21,7 @@ public class Lite {
 
     static String POSITION_KEY = "lite_general_holder_position";
 
-    static class LiteBuilder implements NeedLiteIcons, NeedLiteHolder, NeedLiteNavigator, NeedLitePage {
+    static class LiteBuilder implements NeedLiteIcons, NeedLiteHolder, NeedLiteNavigator, NeedLitePage, Buildable {
 
         private List<Pair<Integer, Integer>> icons;
 
@@ -81,6 +82,11 @@ public class Lite {
         public NeedLiteIcons page(Fragment fragment) {
             if (fragments == null) fragments = new ArrayList<>();
             fragments.add(fragment);
+            return this;
+        }
+
+        @Override
+        public Buildable switchListener(SwitchListener switchListener) {
             return this;
         }
 
