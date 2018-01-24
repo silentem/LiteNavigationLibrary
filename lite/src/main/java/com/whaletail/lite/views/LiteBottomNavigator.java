@@ -10,6 +10,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.whaletail.lite.listeners.SwitchListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +28,9 @@ public class LiteBottomNavigator extends LinearLayout {
 
     private List<LiteNavigatorItem> liteNavigatorItems;
 
-    private LiteGeneralHolder.OnItemClick listener;
+    private LiteGeneralHolder.OnItemClick clickListener;
+
+    private SwitchListener switchListener;
 
     public LiteBottomNavigator(Context context) {
         super(context);
@@ -64,8 +68,12 @@ public class LiteBottomNavigator extends LinearLayout {
         super.onRestoreInstanceState(state);
     }
 
-    public void setListener(LiteGeneralHolder.OnItemClick listener) {
-        this.listener = listener;
+    public void setClickListener(LiteGeneralHolder.OnItemClick clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    public void setSwitchListener(SwitchListener switchListener) {
+        this.switchListener = switchListener;
     }
 
     public void createNavigators(List<Pair<Integer, Integer>> menuIcons) {
@@ -92,6 +100,9 @@ public class LiteBottomNavigator extends LinearLayout {
                     LiteNavigatorItem navigatorItem = (LiteNavigatorItem) view;
                     int positionPressed = navigatorItem.getPosition();
                     setCurrentPosition(positionPressed);
+                    if (switchListener != null) {
+                        switchListener.onSwitch();
+                    }
                 }
             });
 
@@ -108,7 +119,7 @@ public class LiteBottomNavigator extends LinearLayout {
         if (currentPosition != positionPressed) {
             liteNavigatorItems.get(positionPressed).setOn();
             liteNavigatorItems.get(currentPosition).setOff();
-            listener.onItemClick(positionPressed);
+            clickListener.onItemClick(positionPressed);
             currentPosition = positionPressed;
         }
     }

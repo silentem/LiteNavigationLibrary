@@ -75,7 +75,7 @@ public class Lite {
             navigator.createNavigators(icons);
             holder.setManager(manager);
             holder.setFragments(fragments);
-            navigator.setListener(holder.getListener());
+            navigator.setClickListener(holder.getListener());
         }
 
         @Override
@@ -87,6 +87,7 @@ public class Lite {
 
         @Override
         public Buildable switchListener(SwitchListener switchListener) {
+            navigator.setSwitchListener(switchListener);
             return this;
         }
 
