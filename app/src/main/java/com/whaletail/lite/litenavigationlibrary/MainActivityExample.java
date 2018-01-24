@@ -2,8 +2,10 @@ package com.whaletail.lite.litenavigationlibrary;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.whaletail.lite.Lite;
+import com.whaletail.lite.listeners.SwitchListener;
 import com.whaletail.lite.litenavigationlibrary.fragment.LiteFragment;
 import com.whaletail.lite.views.LiteBottomNavigator;
 import com.whaletail.lite.views.LiteGeneralHolder;
@@ -13,6 +15,7 @@ import butterknife.ButterKnife;
 
 public class MainActivityExample extends AppCompatActivity {
 
+    private static final String TAG = MainActivityExample.class.getSimpleName();
 
     @BindView(R.id.bottom_navigation_main)
     LiteBottomNavigator bottom;
@@ -37,6 +40,12 @@ public class MainActivityExample extends AppCompatActivity {
                 .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
                 .page(new LiteFragment())
                 .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
+                .switchListener(new SwitchListener() {
+                    @Override
+                    public void onSwitch() {
+                        Log.i(TAG, "onSwitch triggered");
+                    }
+                })
                 .build();
 
     }
