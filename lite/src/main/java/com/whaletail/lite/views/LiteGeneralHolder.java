@@ -39,9 +39,6 @@ public class LiteGeneralHolder extends FrameLayout {
     @Nullable
     @Override
     protected Parcelable onSaveInstanceState() {
-        manager.beginTransaction()
-                .remove(manager.findFragmentById(getId()))
-                .commit();
         return super.onSaveInstanceState();
     }
 
