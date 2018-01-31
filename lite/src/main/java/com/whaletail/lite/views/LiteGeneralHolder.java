@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import java.util.List;
@@ -17,6 +19,8 @@ import java.util.List;
  */
 
 public class LiteGeneralHolder extends FrameLayout {
+
+    private static final String TAG = LiteGeneralHolder.class.getSimpleName();
 
     private List<Fragment> fragments;
 
@@ -49,7 +53,7 @@ public class LiteGeneralHolder extends FrameLayout {
             throw new RuntimeException("LiteGeneralHolder must have fragment manager");
         this.fragments = fragments;
         manager.beginTransaction()
-                .add(getId(), fragments.get(0))
+                .replace(getId(), fragments.get(0))
                 .commit();
     }
 
