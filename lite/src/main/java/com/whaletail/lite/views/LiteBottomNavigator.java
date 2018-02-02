@@ -98,11 +98,11 @@ public class LiteBottomNavigator extends LinearLayout {
                 @Override
                 public void onClick(View view) {
                     LiteNavigatorItem navigatorItem = (LiteNavigatorItem) view;
-                    int positionPressed = navigatorItem.getPosition();
-                    setCurrentPosition(positionPressed);
                     if (switchListener != null) {
                         switchListener.onSwitch();
                     }
+                    int positionPressed = navigatorItem.getPosition();
+                    setCurrentPosition(positionPressed);
                 }
             });
 
