@@ -55,14 +55,16 @@ dependencies { compile 'com.github.silentem:LiteNavigationLibrary:LATEST_VERSION
                     public boolean onPreGetFragment(final int position) {
                         Log.i(TAG, "position: " + position);
 
-                        new Button(MainActivityExample.this).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                setShouldClick(true);
-                                bottom.setCurrentPosition(position);
-
-                            }
-                        });
+                        if (!isShouldClick()){
+                            new Button(MainActivityExample.this).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    setShouldClick(true);
+                                    bottom.setCurrentPosition(position);
+    
+                                }
+                            });
+                        }
 
                         return isShouldClick();
                     }
