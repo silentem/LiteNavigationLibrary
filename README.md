@@ -1,7 +1,12 @@
 # Lite Navigation Library
 
 # How to use
-1) Copy sources to your project
+1) Add library via dependency
+
+```
+dependencies { compile 'com.github.silentem:LiteNavigationLibrary:LATEST_VERSION' }
+```
+
 2) Add a views to your layout
 
 ```xml
@@ -22,17 +27,64 @@
   
   3) Use Api to create navigator with holder
   
-  ```kotlin
-  
-        Lite.builder(supportFragmentManager)
-                .navigator(lbn_general)
-                .holder(lgh_general)
-                .page(Fragment())
-                .icon(R.mipmap.ic_home_active)
-                .page(Fragment())
-                .icons(R.mipmap.ic_store_active, R.mipmap.ic_store_no_active)
-                .page(Fragment())
-                .icons(R.mipmap.ic_cart_active, R.mipmap.ic_cart_no_active)
-                .build()
+  ```java
+ 
+        Lite.builder(getSupportFragmentManager())
+                .navigator(bottom)
+                .holder(viewPager)
+                .page(new LiteFragmentListener() {
+
+                    private boolean shouldClick = false;
+
+                    private boolean isShouldClick() {
+                        return shouldClick;
+                    }
+
+                    private void setShouldClick(boolean shouldClick) {
+                        this.shouldClick = shouldClick;
+                    }
+
+                    @NonNull
+                    @Override
+                    public Fragment getFragment() {
+                        Log.i(TAG, "onClick triggered");
+                        return new LiteFragment();
+                    }
+
+                    @Override
+                    public boolean onPreGetFragment(final int position) {
+                        Log.i(TAG, "position: " + position);
+
+                        if (!isShouldClick()){
+                            new Button(MainActivityExample.this).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    setShouldClick(true);
+                                    bottom.setCurrentPosition(position);
+    
+                                }
+                            });
+                        }
+
+                        return isShouldClick();
+                    }
+                })
+                .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
+                .page(new LiteFragment())
+                .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
+                .page(new LiteFragment())
+                .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
+                .page(new LiteFragment())
+                .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
+                .page(new LiteFragment())
+                .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
+                .switchListener(new SwitchListener() {
+                    @Override
+                    public void onSwitch() {
+                        Log.i(TAG, "onSwitch triggered");
+                    }
+                })
+                .build();
                 
 ```
+
