@@ -1,5 +1,6 @@
 package com.whaletail.lite;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.util.Pair;
@@ -25,7 +26,7 @@ public class Lite {
 
         private List<Pair<Integer, Integer>> icons;
 
-        private List<Fragment> fragments;
+        private List<LiteFragmentListener> listeners;
 
         private LiteGeneralHolder holder;
 
@@ -50,21 +51,21 @@ public class Lite {
         }
 
         @Override
-        public NeedLitePage icons(Integer on, Integer off) {
+        public NeedLitePage icons(@NonNull Integer on, @NonNull Integer off) {
             if (icons == null) icons = new ArrayList<>();
             icons.add(new Pair<>(on, off));
             return this;
         }
 
         @Override
-        public NeedLitePage icons(Pair<Integer, Integer> icons) {
+        public NeedLitePage icons(@NonNull Pair<Integer, Integer> icons) {
             if (this.icons == null) this.icons = new ArrayList<>();
             this.icons.add(icons);
             return this;
         }
 
         @Override
-        public NeedLitePage icon(Integer icon) {
+        public NeedLitePage icon(@NonNull Integer icon) {
             if (icons == null) icons = new ArrayList<>();
             icons.add(new Pair<>(icon, icon));
             return this;
@@ -74,14 +75,27 @@ public class Lite {
         public void build() {
             navigator.createNavigators(icons);
             holder.setManager(manager);
-            holder.setFragments(fragments);
+            holder.setFragmentListeners(listeners);
             navigator.setClickListener(holder.getListener());
         }
 
         @Override
-        public NeedLiteIcons page(Fragment fragment) {
-            if (fragments == null) fragments = new ArrayList<>();
-            fragments.add(fragment);
+        public NeedLiteIcons page(final Fragment fragment) {
+            if (listeners == null) listeners = new ArrayList<>();
+            listeners.add(new LiteFragmentListener() {
+                @NonNull
+                @Override
+                public Fragment getFragment() {
+                    return fragment;
+                }
+            });
+            return this;
+        }
+
+        @Override
+        public NeedLiteIcons page(LiteFragmentListener liteFragmentListener) {
+            if (listeners == null) listeners = new ArrayList<>();
+            listeners.add(liteFragmentListener);
             return this;
         }
 

@@ -11,6 +11,7 @@ import com.whaletail.lite.listeners.SwitchListener;
 
 public interface NeedLitePage {
     NeedLiteIcons page(Fragment fragment);
+    NeedLiteIcons page(LiteFragmentListener liteFragmentListener);
     Buildable switchListener(SwitchListener switchListener);
     void build();
 }

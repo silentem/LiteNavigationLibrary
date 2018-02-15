@@ -4,12 +4,11 @@ import android.content.Context;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
 import android.widget.FrameLayout;
+
+import com.whaletail.lite.LiteFragmentListener;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class LiteGeneralHolder extends FrameLayout {
 
     private static final String TAG = LiteGeneralHolder.class.getSimpleName();
 
-    private List<Fragment> fragments;
+    private List<LiteFragmentListener> listeners;
 
     private FragmentManager manager;
 
@@ -46,14 +45,14 @@ public class LiteGeneralHolder extends FrameLayout {
         return super.onSaveInstanceState();
     }
 
-    public void setFragments(List<Fragment> fragments) {
-        if (fragments.isEmpty())
+    public void setFragmentListeners(List<LiteFragmentListener> listeners) {
+        if (listeners.isEmpty())
             throw new RuntimeException("LiteGeneralHolder must be filled with at least 1 fragment");
         if (manager == null)
             throw new RuntimeException("LiteGeneralHolder must have fragment manager");
-        this.fragments = fragments;
+        this.listeners = listeners;
         manager.beginTransaction()
-                .replace(getId(), fragments.get(0))
+                .replace(getId(), listeners.get(0).getFragment())
                 .commit();
     }
 
@@ -64,7 +63,7 @@ public class LiteGeneralHolder extends FrameLayout {
     class OnItemClick {
         void onItemClick(int newPosition) {
             manager.beginTransaction()
-                    .replace(getId(), fragments.get(newPosition))
+                    .replace(getId(), listeners.get(newPosition).getFragment())
                     .commit();
         }
     }

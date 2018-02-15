@@ -1,6 +1,7 @@
 package com.whaletail.lite;
 
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.v4.util.Pair;
 
 /**
@@ -9,9 +10,9 @@ import android.support.v4.util.Pair;
  */
 
 public interface NeedLiteIcons {
-    NeedLitePage icons(@DrawableRes Integer on, @DrawableRes Integer off);
+    NeedLitePage icons(@NonNull @DrawableRes Integer on, @NonNull @DrawableRes Integer off);
 
-    NeedLitePage icons(Pair<Integer, Integer> icons);
+    NeedLitePage icons(@NonNull Pair<Integer, Integer> icons);
 
-    NeedLitePage icon(@DrawableRes Integer icon);
+    NeedLitePage icon(@NonNull @DrawableRes Integer icon);
 }

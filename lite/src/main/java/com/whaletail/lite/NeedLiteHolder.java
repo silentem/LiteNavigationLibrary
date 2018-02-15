@@ -1,6 +1,8 @@
 package com.whaletail.lite;
 
 
+import android.support.annotation.NonNull;
+
 import com.whaletail.lite.views.LiteGeneralHolder;
 
 /**
@@ -9,5 +11,5 @@ import com.whaletail.lite.views.LiteGeneralHolder;
  */
 
 public interface NeedLiteHolder {
-    NeedLitePage holder(LiteGeneralHolder holder);
+    NeedLitePage holder(@NonNull LiteGeneralHolder holder);
 }

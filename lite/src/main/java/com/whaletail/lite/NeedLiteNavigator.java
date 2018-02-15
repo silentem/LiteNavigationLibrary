@@ -1,6 +1,8 @@
 package com.whaletail.lite;
 
 
+import android.support.annotation.NonNull;
+
 import com.whaletail.lite.views.LiteBottomNavigator;
 
 /**
@@ -9,5 +11,5 @@ import com.whaletail.lite.views.LiteBottomNavigator;
  */
 
 public interface NeedLiteNavigator {
-    NeedLiteHolder navigator(LiteBottomNavigator navigator);
+    NeedLiteHolder navigator(@NonNull LiteBottomNavigator navigator);
 }

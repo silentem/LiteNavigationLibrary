@@ -1,10 +1,13 @@
 package com.whaletail.lite.litenavigationlibrary;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.whaletail.lite.Lite;
+import com.whaletail.lite.LiteFragmentListener;
 import com.whaletail.lite.listeners.SwitchListener;
 import com.whaletail.lite.litenavigationlibrary.fragment.LiteFragment;
 import com.whaletail.lite.views.LiteBottomNavigator;
@@ -30,7 +33,14 @@ public class MainActivityExample extends AppCompatActivity {
         Lite.builder(getSupportFragmentManager())
                 .navigator(bottom)
                 .holder(viewPager)
-                .page(new LiteFragment())
+                .page(new LiteFragmentListener() {
+                    @NonNull
+                    @Override
+                    public Fragment getFragment() {
+                        Log.i(TAG, "onClick triggered");
+                        return new LiteFragment();
+                    }
+                })
                 .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
                 .page(new LiteFragment())
                 .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
