@@ -24,7 +24,7 @@ import static com.whaletail.lite.LiteConstants.POSITION_KEY;
 
 public class LiteBottomNavigator extends LinearLayout {
 
-    private int currentPosition = 0;
+    private int currentPosition = -1;
 
     private List<LiteNavigatorItem> liteNavigatorItems;
 
