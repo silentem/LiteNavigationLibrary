@@ -4,7 +4,7 @@
 1) Add library via dependency
 
 ```
-dependencies { compile 'com.github.silentem:LiteNavigationLibrary:v0.1.0' }
+dependencies { compile 'com.github.silentem:LiteNavigationLibrary:LATEST_VERSION' }
 ```
 
 2) Add a views to your layout
