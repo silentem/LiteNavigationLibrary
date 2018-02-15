@@ -13,6 +13,8 @@ import com.whaletail.lite.litenavigationlibrary.fragment.LiteFragment;
 import com.whaletail.lite.views.LiteBottomNavigator;
 import com.whaletail.lite.views.LiteGeneralHolder;
 
+import java.util.Random;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -39,6 +41,12 @@ public class MainActivityExample extends AppCompatActivity {
                     public Fragment getFragment() {
                         Log.i(TAG, "onClick triggered");
                         return new LiteFragment();
+                    }
+
+                    @Override
+                    public boolean onPreGetFragment(int position) {
+                        Log.i(TAG, "position: " + position);
+                        return new Random().nextBoolean();
                     }
                 })
                 .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)

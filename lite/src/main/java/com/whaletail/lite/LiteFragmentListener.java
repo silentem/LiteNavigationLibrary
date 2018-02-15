@@ -10,4 +10,6 @@ import android.support.v4.app.Fragment;
 public interface LiteFragmentListener {
     @NonNull
     Fragment getFragment();
+
+    boolean onPreGetFragment(int position);
 }

@@ -117,10 +117,11 @@ public class LiteBottomNavigator extends LinearLayout {
 
     public void setCurrentPosition(int positionPressed) {
         if (currentPosition != positionPressed) {
-            liteNavigatorItems.get(positionPressed).setOn();
-            liteNavigatorItems.get(currentPosition).setOff();
-            clickListener.onItemClick(positionPressed);
-            currentPosition = positionPressed;
+            if (clickListener.onItemClick(positionPressed)) {
+                liteNavigatorItems.get(positionPressed).setOn();
+                liteNavigatorItems.get(currentPosition).setOff();
+                currentPosition = positionPressed;
+            }
         }
     }
 

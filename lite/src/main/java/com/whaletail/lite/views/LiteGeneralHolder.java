@@ -51,9 +51,11 @@ public class LiteGeneralHolder extends FrameLayout {
         if (manager == null)
             throw new RuntimeException("LiteGeneralHolder must have fragment manager");
         this.listeners = listeners;
-        manager.beginTransaction()
-                .replace(getId(), listeners.get(0).getFragment())
-                .commit();
+        if (listeners.get(0).onPreGetFragment(0)) {
+            manager.beginTransaction()
+                    .replace(getId(), listeners.get(0).getFragment())
+                    .commit();
+        }
     }
 
     public void setManager(FragmentManager manager) {
@@ -61,10 +63,15 @@ public class LiteGeneralHolder extends FrameLayout {
     }
 
     class OnItemClick {
-        void onItemClick(int newPosition) {
-            manager.beginTransaction()
-                    .replace(getId(), listeners.get(newPosition).getFragment())
-                    .commit();
+        boolean onItemClick(int newPosition) {
+            if (listeners.get(newPosition).onPreGetFragment(newPosition)) {
+                manager.beginTransaction()
+                        .replace(getId(), listeners.get(newPosition).getFragment())
+                        .commit();
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 

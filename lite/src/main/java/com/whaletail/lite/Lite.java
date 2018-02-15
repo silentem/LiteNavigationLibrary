@@ -88,6 +88,11 @@ public class Lite {
                 public Fragment getFragment() {
                     return fragment;
                 }
+
+                @Override
+                public boolean onPreGetFragment(int position) {
+                    return true;
+                }
             });
             return this;
         }
