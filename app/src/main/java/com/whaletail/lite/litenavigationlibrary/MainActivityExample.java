@@ -41,8 +41,8 @@ public class MainActivityExample extends AppCompatActivity {
 
                     private boolean shouldClick = false;
 
-                    private boolean isShouldClick() {
-                        return shouldClick;
+                    private boolean isShouldClick(int position) {
+                        return shouldClick && position != bottom.getCurrentPosition();
                     }
 
                     private void setShouldClick(boolean shouldClick) {
@@ -69,7 +69,7 @@ public class MainActivityExample extends AppCompatActivity {
                             }
                         });
 
-                        return isShouldClick();
+                        return isShouldClick(position);
                     }
                 })
                 .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)

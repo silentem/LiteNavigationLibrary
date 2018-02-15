@@ -91,7 +91,7 @@ public class Lite {
 
                 @Override
                 public boolean onPreGetFragment(int position) {
-                    return true;
+                    return position != navigator.getCurrentPosition();
                 }
             });
             return this;
