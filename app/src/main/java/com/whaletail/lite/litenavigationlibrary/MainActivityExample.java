@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.whaletail.lite.Lite;
 import com.whaletail.lite.LiteFragmentListener;
@@ -36,6 +38,17 @@ public class MainActivityExample extends AppCompatActivity {
                 .navigator(bottom)
                 .holder(viewPager)
                 .page(new LiteFragmentListener() {
+
+                    private boolean shouldClick = false;
+
+                    private boolean isShouldClick() {
+                        return shouldClick;
+                    }
+
+                    private void setShouldClick(boolean shouldClick) {
+                        this.shouldClick = shouldClick;
+                    }
+
                     @NonNull
                     @Override
                     public Fragment getFragment() {
@@ -44,9 +57,19 @@ public class MainActivityExample extends AppCompatActivity {
                     }
 
                     @Override
-                    public boolean onPreGetFragment(int position) {
+                    public boolean onPreGetFragment(final int position) {
                         Log.i(TAG, "position: " + position);
-                        return new Random().nextBoolean();
+
+                        new Button(MainActivityExample.this).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                setShouldClick(true);
+                                bottom.setCurrentPosition(position);
+
+                            }
+                        });
+
+                        return isShouldClick();
                     }
                 })
                 .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
