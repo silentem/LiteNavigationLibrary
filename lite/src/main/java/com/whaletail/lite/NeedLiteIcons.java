@@ -13,12 +13,13 @@ import com.whaletail.lite.listeners.LiteLayoutParamsListener;
 
 public interface NeedLiteIcons {
     NeedLitePage icons(@NonNull @DrawableRes Integer on, @NonNull @DrawableRes Integer off);
-
     NeedLitePage icons(@NonNull Pair<Integer, Integer> icons);
 
     NeedLitePage icon(@NonNull @DrawableRes Integer icon);
 
     NeedLitePage icons(@NonNull Pair<Integer, Integer> icons, LiteLayoutParamsListener liteLayoutParamsListener);
+
+    NeedLitePage icons(@NonNull @DrawableRes Integer on, @NonNull @DrawableRes Integer off, LiteLayoutParamsListener liteLayoutParamsListener);
 
     NeedLitePage icon(@NonNull @DrawableRes Integer icon, LiteLayoutParamsListener liteLayoutParamsListener);
 }

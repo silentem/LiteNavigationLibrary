@@ -82,6 +82,13 @@ public class Lite {
         }
 
         @Override
+        public NeedLitePage icons(@NonNull Integer on, @NonNull Integer off, LiteLayoutParamsListener listener) {
+            if (this.icons == null) this.icons = new ArrayList<>();
+            this.icons.add(new Pair<>(new Pair<>(on, off), listener.getLayoutParams()));
+            return this;
+        }
+
+        @Override
         public NeedLitePage icon(@NonNull Integer icon, @NonNull LiteLayoutParamsListener listener) {
             if (icons == null) icons = new ArrayList<>();
             icons.add(new Pair<>(new Pair<>(icon, icon), listener.getLayoutParams()));
