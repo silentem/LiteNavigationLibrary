@@ -69,7 +69,14 @@ dependencies { compile 'com.github.silentem:LiteNavigationLibrary:LATEST_VERSION
                         return isShouldClick();
                     }
                 })
-                .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
+                .icon(R.mipmap.ic_launcher_round, new LiteLayoutParamsListener() {
+                    @Override
+                    public RelativeLayout.LayoutParams getLayoutParams() {
+                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(75, 75);
+                        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+                        return layoutParams;
+                    }
+                })
                 .page(new LiteFragment())
                 .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
                 .page(new LiteFragment())
