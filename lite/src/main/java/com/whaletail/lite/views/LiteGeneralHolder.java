@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-import com.whaletail.lite.LiteFragmentListener;
+import com.whaletail.lite.listeners.LiteFragmentListener;
 
 import java.util.List;
 

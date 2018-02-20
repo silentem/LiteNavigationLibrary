@@ -21,25 +21,26 @@ public class LiteNavigatorItem extends RelativeLayout {
 
     public LiteNavigatorItem(@NonNull Context context) {
         super(context);
-        init();
     }
 
     public LiteNavigatorItem(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
     public LiteNavigatorItem(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
     }
 
-    private void init() {
+    void init() {
         icon = new ImageView(getContext());
 
         LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lp.addRule(CENTER_IN_PARENT);
         addView(icon, lp);
+    }
+    void init(@NonNull LayoutParams layoutParams) {
+        icon = new ImageView(getContext());
+        addView(icon, layoutParams);
     }
 
     public int getPosition() {

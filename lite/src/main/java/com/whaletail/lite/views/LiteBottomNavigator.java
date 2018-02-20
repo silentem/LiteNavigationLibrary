@@ -3,12 +3,14 @@ package com.whaletail.lite.views;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.Pair;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.whaletail.lite.listeners.SwitchListener;
 
@@ -76,15 +78,22 @@ public class LiteBottomNavigator extends LinearLayout {
         this.switchListener = switchListener;
     }
 
-    public void createNavigators(List<Pair<Integer, Integer>> menuIcons) {
+    public void createNavigators(@NonNull List<Pair<Pair<Integer, Integer>, RelativeLayout.LayoutParams>> menuIcons) {
         float weight = 1;
         liteNavigatorItems = new ArrayList<>();
         for (int i = 0; i < menuIcons.size(); i++) {
-            Pair<Integer, Integer> menuIcon = menuIcons.get(i);
+            Pair<Integer, Integer> menuIcon = menuIcons.get(i).first;
             Integer on = menuIcon.first;
             Integer off = menuIcon.second;
 
+            RelativeLayout.LayoutParams layoutParams = menuIcons.get(i).second;
+
             LiteNavigatorItem icon = new LiteNavigatorItem(getContext());
+            if (layoutParams != null) {
+                icon.init(layoutParams);
+            } else {
+                icon.init();
+            }
             liteNavigatorItems.add(icon);
             icon.setIcon(on, off);
             icon.setPosition(i);

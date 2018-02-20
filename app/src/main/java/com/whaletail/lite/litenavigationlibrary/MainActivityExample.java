@@ -7,15 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.whaletail.lite.Lite;
-import com.whaletail.lite.LiteFragmentListener;
+import com.whaletail.lite.listeners.LiteFragmentListener;
+import com.whaletail.lite.listeners.LiteLayoutParamsListener;
 import com.whaletail.lite.listeners.SwitchListener;
 import com.whaletail.lite.litenavigationlibrary.fragment.LiteFragment;
 import com.whaletail.lite.views.LiteBottomNavigator;
 import com.whaletail.lite.views.LiteGeneralHolder;
-
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,11 +72,32 @@ public class MainActivityExample extends AppCompatActivity {
                         return isShouldClick(position);
                     }
                 })
-                .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
+                .icon(R.mipmap.ic_launcher_round, new LiteLayoutParamsListener() {
+                    @Override
+                    public RelativeLayout.LayoutParams getLayoutParams() {
+                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(50, 50);
+                        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+                        return layoutParams;
+                    }
+                })
                 .page(new LiteFragment())
-                .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
+                .icon(R.mipmap.ic_launcher_round, new LiteLayoutParamsListener() {
+                    @Override
+                    public RelativeLayout.LayoutParams getLayoutParams() {
+                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(75, 75);
+                        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+                        return layoutParams;
+                    }
+                })
                 .page(new LiteFragment())
-                .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
+                .icon(R.mipmap.ic_launcher_round, new LiteLayoutParamsListener() {
+                    @Override
+                    public RelativeLayout.LayoutParams getLayoutParams() {
+                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(100, 100);
+                        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+                        return layoutParams;
+                    }
+                })
                 .page(new LiteFragment())
                 .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
                 .page(new LiteFragment())

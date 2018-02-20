@@ -1,4 +1,4 @@
-package com.whaletail.lite;
+package com.whaletail.lite.listeners;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;

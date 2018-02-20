@@ -4,6 +4,8 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v4.util.Pair;
 
+import com.whaletail.lite.listeners.LiteLayoutParamsListener;
+
 /**
  * @author whaletail
  * @date 18.01.18.
@@ -15,4 +17,8 @@ public interface NeedLiteIcons {
     NeedLitePage icons(@NonNull Pair<Integer, Integer> icons);
 
     NeedLitePage icon(@NonNull @DrawableRes Integer icon);
+
+    NeedLitePage icons(@NonNull Pair<Integer, Integer> icons, LiteLayoutParamsListener liteLayoutParamsListener);
+
+    NeedLitePage icon(@NonNull @DrawableRes Integer icon, LiteLayoutParamsListener liteLayoutParamsListener);
 }

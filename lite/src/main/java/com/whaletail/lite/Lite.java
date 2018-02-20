@@ -4,7 +4,10 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.util.Pair;
+import android.widget.RelativeLayout;
 
+import com.whaletail.lite.listeners.LiteFragmentListener;
+import com.whaletail.lite.listeners.LiteLayoutParamsListener;
 import com.whaletail.lite.listeners.SwitchListener;
 import com.whaletail.lite.views.LiteBottomNavigator;
 import com.whaletail.lite.views.LiteGeneralHolder;
@@ -24,7 +27,7 @@ public class Lite {
 
     static class LiteBuilder implements NeedLiteIcons, NeedLiteHolder, NeedLiteNavigator, NeedLitePage, Buildable {
 
-        private List<Pair<Integer, Integer>> icons;
+        private List<Pair<Pair<Integer, Integer>, RelativeLayout.LayoutParams>> icons;
 
         private List<LiteFragmentListener> listeners;
 
@@ -53,21 +56,35 @@ public class Lite {
         @Override
         public NeedLitePage icons(@NonNull Integer on, @NonNull Integer off) {
             if (icons == null) icons = new ArrayList<>();
-            icons.add(new Pair<>(on, off));
+            icons.add(new Pair<Pair<Integer, Integer>, RelativeLayout.LayoutParams>(new Pair<>(on, off), null));
             return this;
         }
 
         @Override
         public NeedLitePage icons(@NonNull Pair<Integer, Integer> icons) {
             if (this.icons == null) this.icons = new ArrayList<>();
-            this.icons.add(icons);
+            this.icons.add(new Pair<Pair<Integer, Integer>, RelativeLayout.LayoutParams>(icons, null));
             return this;
         }
 
         @Override
         public NeedLitePage icon(@NonNull Integer icon) {
             if (icons == null) icons = new ArrayList<>();
-            icons.add(new Pair<>(icon, icon));
+            icons.add(new Pair<Pair<Integer, Integer>, RelativeLayout.LayoutParams>(new Pair<>(icon, icon), null));
+            return this;
+        }
+
+        @Override
+        public NeedLitePage icons(@NonNull Pair<Integer, Integer> icons, @NonNull LiteLayoutParamsListener listener) {
+            if (this.icons == null) this.icons = new ArrayList<>();
+            this.icons.add(new Pair<>(icons, listener.getLayoutParams()));
+            return this;
+        }
+
+        @Override
+        public NeedLitePage icon(@NonNull Integer icon, @NonNull LiteLayoutParamsListener listener) {
+            if (icons == null) icons = new ArrayList<>();
+            icons.add(new Pair<>(new Pair<>(icon, icon), listener.getLayoutParams()));
             return this;
         }
 

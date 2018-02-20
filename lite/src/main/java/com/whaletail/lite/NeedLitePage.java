@@ -2,6 +2,7 @@ package com.whaletail.lite;
 
 import android.support.v4.app.Fragment;
 
+import com.whaletail.lite.listeners.LiteFragmentListener;
 import com.whaletail.lite.listeners.SwitchListener;
 
 /**
