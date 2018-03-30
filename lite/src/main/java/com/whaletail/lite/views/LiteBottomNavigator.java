@@ -78,6 +78,13 @@ public class LiteBottomNavigator extends LinearLayout {
         this.switchListener = switchListener;
     }
 
+    public void clean(){
+        removeAllViews();
+        liteNavigatorItems.clear();
+        clickListener = null;
+        switchListener = null;
+    }
+
     public void createNavigators(@NonNull List<Pair<Pair<Integer, Integer>, RelativeLayout.LayoutParams>> menuIcons) {
         float weight = 1;
         liteNavigatorItems = new ArrayList<>();

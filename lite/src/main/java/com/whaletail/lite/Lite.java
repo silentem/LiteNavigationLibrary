@@ -103,6 +103,8 @@ public class Lite {
             navigator.setClickListener(holder.getListener());
         }
 
+
+
         @Override
         public NeedLiteIcons page(final Fragment fragment) {
             if (listeners == null) listeners = new ArrayList<>();

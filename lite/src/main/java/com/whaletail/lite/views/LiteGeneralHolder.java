@@ -58,6 +58,10 @@ public class LiteGeneralHolder extends FrameLayout {
         }
     }
 
+    public void clean(){
+        listeners.clear();
+    }
+
     public void setManager(FragmentManager manager) {
         this.manager = manager;
     }
