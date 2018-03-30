@@ -58,12 +58,18 @@ public class LiteGeneralHolder extends FrameLayout {
         }
     }
 
-    public void clean(){
-        listeners.clear();
+    public void clean() {
+        if (listeners != null) {
+            listeners.clear();
+        }
     }
 
     public void setManager(FragmentManager manager) {
         this.manager = manager;
+    }
+
+    public OnItemClick getListener() {
+        return onItemClickListener;
     }
 
     class OnItemClick {
@@ -77,10 +83,6 @@ public class LiteGeneralHolder extends FrameLayout {
                 return false;
             }
         }
-    }
-
-    public OnItemClick getListener() {
-        return onItemClickListener;
     }
 
 }

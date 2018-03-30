@@ -80,7 +80,9 @@ public class LiteBottomNavigator extends LinearLayout {
 
     public void clean(){
         removeAllViews();
-        liteNavigatorItems.clear();
+        if (liteNavigatorItems != null) {
+            liteNavigatorItems.clear();
+        }
         clickListener = null;
         switchListener = null;
     }
