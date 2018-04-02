@@ -100,7 +100,7 @@ public class Lite {
             navigator.createNavigators(icons);
             holder.setManager(manager);
             holder.setFragmentListeners(listeners);
-            navigator.setClickListener(holder.getListener());
+            navigator.setGeneralHolder(holder);
         }
 
 

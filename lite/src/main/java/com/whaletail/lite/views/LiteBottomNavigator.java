@@ -30,7 +30,7 @@ public class LiteBottomNavigator extends LinearLayout {
 
     private List<LiteNavigatorItem> liteNavigatorItems;
 
-    private LiteGeneralHolder.OnItemClick clickListener;
+    private LiteGeneralHolder generalHolder;
 
     private SwitchListener switchListener;
 
@@ -62,6 +62,12 @@ public class LiteBottomNavigator extends LinearLayout {
         if (state instanceof Bundle) {
             Bundle bundle = (Bundle) state;
             int position = bundle.getInt(POSITION_KEY);
+            if (liteNavigatorItems == null) {
+                liteNavigatorItems = new ArrayList<>();
+                fillLiteNavigatorItemsAfterRestoreInstance(liteNavigatorItems);
+            } else if (liteNavigatorItems.isEmpty()) {
+                fillLiteNavigatorItemsAfterRestoreInstance(liteNavigatorItems);
+            }
             if (position != 0) {
                 setCurrentPosition(position);
             }
@@ -70,21 +76,18 @@ public class LiteBottomNavigator extends LinearLayout {
         super.onRestoreInstanceState(state);
     }
 
-    public void setClickListener(LiteGeneralHolder.OnItemClick clickListener) {
-        this.clickListener = clickListener;
+    private void fillLiteNavigatorItemsAfterRestoreInstance(List<LiteNavigatorItem> liteNavigatorItems) {
+        for (int i = 0; i < getChildCount(); i++) {
+            liteNavigatorItems.add(((LiteNavigatorItem) getChildAt(i)));
+        }
+    }
+
+    public void setGeneralHolder(LiteGeneralHolder generalHolder) {
+        this.generalHolder = generalHolder;
     }
 
     public void setSwitchListener(SwitchListener switchListener) {
         this.switchListener = switchListener;
-    }
-
-    public void clean(){
-        removeAllViews();
-        if (liteNavigatorItems != null) {
-            liteNavigatorItems.clear();
-        }
-        clickListener = null;
-        switchListener = null;
     }
 
     public void createNavigators(@NonNull List<Pair<Pair<Integer, Integer>, RelativeLayout.LayoutParams>> menuIcons) {
@@ -138,7 +141,7 @@ public class LiteBottomNavigator extends LinearLayout {
     }
 
     public void setCurrentPosition(int positionPressed) {
-        if (clickListener.onItemClick(positionPressed)) {
+        if (generalHolder.getListener().onItemClick(positionPressed)) {
             liteNavigatorItems.get(positionPressed).setOn();
             liteNavigatorItems.get(currentPosition == -1 ? 0 : currentPosition).setOff();
             currentPosition = positionPressed;

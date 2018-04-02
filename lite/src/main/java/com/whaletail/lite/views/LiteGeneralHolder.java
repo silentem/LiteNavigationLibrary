@@ -77,7 +77,7 @@ public class LiteGeneralHolder extends FrameLayout {
             if (listeners.get(newPosition).onPreGetFragment(newPosition)) {
                 manager.beginTransaction()
                         .replace(getId(), listeners.get(newPosition).getFragment())
-                        .commit();
+                        .commitAllowingStateLoss();
                 return true;
             } else {
                 return false;
