@@ -114,6 +114,7 @@ public class Lite {
 
         @Override
         public void build() {
+            navigator.setLayouts(layouts);
             navigator.createNavigators(icons);
             holder.setManager(manager);
             holder.setFragmentListeners(listeners);
