@@ -9,6 +9,8 @@ import android.support.v4.util.Pair;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -29,6 +31,8 @@ public class LiteBottomNavigator extends LinearLayout {
     private int currentPosition = -1;
 
     private List<LiteNavigatorItem> liteNavigatorItems;
+
+    private List<Pair<ImageView, ViewGroup>> layouts;
 
     private LiteGeneralHolder generalHolder;
 
@@ -86,6 +90,10 @@ public class LiteBottomNavigator extends LinearLayout {
         this.generalHolder = generalHolder;
     }
 
+    public void setLayouts(List<Pair<ImageView, ViewGroup>> layouts) {
+        this.layouts = layouts;
+    }
+
     public void setSwitchListener(SwitchListener switchListener) {
         this.switchListener = switchListener;
     }
@@ -101,7 +109,10 @@ public class LiteBottomNavigator extends LinearLayout {
             RelativeLayout.LayoutParams layoutParams = menuIcons.get(i).second;
 
             LiteNavigatorItem icon = new LiteNavigatorItem(getContext());
-            if (layoutParams != null) {
+            if (layouts != null && !layouts.isEmpty() && layouts.get(i) != null) {
+                Pair<ImageView, ViewGroup> imageViewViewGroupPair = layouts.get(i);
+                icon.init(imageViewViewGroupPair.second, imageViewViewGroupPair.first);
+            } else if (layoutParams != null) {
                 icon.init(layoutParams);
             } else {
                 icon.init();
@@ -142,6 +153,7 @@ public class LiteBottomNavigator extends LinearLayout {
 
     public void setCurrentPosition(int positionPressed) {
         if (generalHolder.getListener().onItemClick(positionPressed)) {
+
             liteNavigatorItems.get(positionPressed).setOn();
             liteNavigatorItems.get(currentPosition == -1 ? 0 : currentPosition).setOff();
             currentPosition = positionPressed;

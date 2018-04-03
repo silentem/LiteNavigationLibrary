@@ -38,9 +38,33 @@ public class LiteNavigatorItem extends RelativeLayout {
         lp.addRule(CENTER_IN_PARENT);
         addView(icon, lp);
     }
+
     void init(@NonNull LayoutParams layoutParams) {
         icon = new ImageView(getContext());
         addView(icon, layoutParams);
+    }
+
+    void init(@NonNull LayoutParams layoutParams, @NonNull ViewGroup layout, ImageView icon) {
+        if (icon != null) {
+            this.icon = icon;
+        } else {
+            this.icon = new ImageView(getContext());
+        }
+
+        addView(layout, layoutParams);
+    }
+
+    void init(@NonNull ViewGroup layout, ImageView icon) {
+        if (icon != null) {
+            this.icon = icon;
+        } else {
+            this.icon = new ImageView(getContext());
+        }
+
+        LayoutParams lp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp.addRule(CENTER_IN_PARENT);
+
+        addView(layout, lp);
     }
 
     public int getPosition() {

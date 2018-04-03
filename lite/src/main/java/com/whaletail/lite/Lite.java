@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.util.Pair;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.whaletail.lite.listeners.LiteFragmentListener;
@@ -25,6 +27,10 @@ public class Lite {
 
     static String POSITION_KEY = "lite_general_holder_position";
 
+    public static NeedLiteNavigator builder(FragmentManager manager) {
+        return new LiteBuilder(manager);
+    }
+
     static class LiteBuilder implements NeedLiteIcons, NeedLiteHolder, NeedLiteNavigator, NeedLitePage, Buildable {
 
         private List<Pair<Pair<Integer, Integer>, RelativeLayout.LayoutParams>> icons;
@@ -36,6 +42,8 @@ public class Lite {
         private LiteBottomNavigator navigator;
 
         private FragmentManager manager;
+
+        private List<Pair<ImageView, ViewGroup>> layouts;
 
         LiteBuilder(FragmentManager manager) {
             this.manager = manager;
@@ -89,6 +97,15 @@ public class Lite {
         }
 
         @Override
+        public NeedLitePage icons(@NonNull Integer on, @NonNull Integer off, @NonNull ViewGroup layout, ImageView icon, LiteLayoutParamsListener liteLayoutParamsListener) {
+            if (this.icons == null) this.icons = new ArrayList<>();
+            if (this.layouts == null) this.layouts = new ArrayList<>();
+            this.icons.add(new Pair<>(new Pair<>(on, off), liteLayoutParamsListener.getLayoutParams()));
+            this.layouts.add(icons.size() - 1, new Pair<>(icon, layout));
+            return this;
+        }
+
+        @Override
         public NeedLitePage icon(@NonNull Integer icon, @NonNull LiteLayoutParamsListener listener) {
             if (icons == null) icons = new ArrayList<>();
             icons.add(new Pair<>(new Pair<>(icon, icon), listener.getLayoutParams()));
@@ -102,7 +119,6 @@ public class Lite {
             holder.setFragmentListeners(listeners);
             navigator.setGeneralHolder(holder);
         }
-
 
 
         @Override
@@ -136,10 +152,6 @@ public class Lite {
             return this;
         }
 
-    }
-
-    public static NeedLiteNavigator builder(FragmentManager manager) {
-        return new LiteBuilder(manager);
     }
 
 }
