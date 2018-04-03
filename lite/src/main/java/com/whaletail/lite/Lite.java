@@ -99,7 +99,12 @@ public class Lite {
         @Override
         public NeedLitePage icons(@NonNull Integer on, @NonNull Integer off, @NonNull ViewGroup layout, ImageView icon, LiteLayoutParamsListener liteLayoutParamsListener) {
             if (this.icons == null) this.icons = new ArrayList<>();
-            if (this.layouts == null) this.layouts = new ArrayList<>(15);
+            if (this.layouts == null) {
+                this.layouts = new ArrayList<>();
+                for (int i = 0; i < 15; i++) {
+                    layouts.add(null);
+                }
+            }
             this.icons.add(new Pair<>(new Pair<>(on, off), liteLayoutParamsListener.getLayoutParams()));
             this.layouts.add(icons.size() - 1, new Pair<>(icon, layout));
             return this;
