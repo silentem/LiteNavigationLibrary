@@ -69,7 +69,11 @@ public class LiteGeneralHolder extends FrameLayout {
     }
 
     public OnItemClick getListener() {
-        return onItemClickListener;
+        if (onItemClickListener != null) {
+            return onItemClickListener;
+        } else {
+            return new OnItemClick();
+        }
     }
 
     class OnItemClick {
