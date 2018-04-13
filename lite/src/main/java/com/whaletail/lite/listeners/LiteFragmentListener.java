@@ -11,5 +11,5 @@ public interface LiteFragmentListener {
     @NonNull
     Fragment getFragment();
 
-    boolean onPreGetFragment(int position);
+    boolean checkBeforeGetFragment(int position);
 }

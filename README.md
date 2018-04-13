@@ -52,7 +52,7 @@ dependencies { compile 'com.github.silentem:LiteNavigationLibrary:LATEST_VERSION
                     }
 
                     @Override
-                    public boolean onPreGetFragment(final int position) {
+                    public boolean checkBeforeGetFragment(final int position) {
                         Log.i(TAG, "position: " + position);
 
                         if (!isShouldClick()){
@@ -85,7 +85,7 @@ dependencies { compile 'com.github.silentem:LiteNavigationLibrary:LATEST_VERSION
                 .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
                 .page(new LiteFragment())
                 .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
-                .switchListener(new SwitchListener() {
+                .onAllClickListener(new SwitchListener() {
                     @Override
                     public void onSwitch() {
                         Log.i(TAG, "onSwitch triggered");

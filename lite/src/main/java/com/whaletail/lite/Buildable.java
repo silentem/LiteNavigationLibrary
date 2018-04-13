@@ -6,5 +6,5 @@ package com.whaletail.lite;
  */
 
 public interface Buildable {
-    void build();
+    LiteState build();
 }

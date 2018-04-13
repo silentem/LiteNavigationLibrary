@@ -5,6 +5,6 @@ package com.whaletail.lite.listeners;
  * @date 24.01.18.
  */
 
-public interface SwitchListener {
-    void onSwitch();
+public interface OnAllClickListener {
+    void onAllClick();
 }

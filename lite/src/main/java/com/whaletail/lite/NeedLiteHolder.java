@@ -1,7 +1,9 @@
 package com.whaletail.lite;
 
 
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.view.ViewGroup;
 
 import com.whaletail.lite.views.LiteGeneralHolder;
 
@@ -12,4 +14,6 @@ import com.whaletail.lite.views.LiteGeneralHolder;
 
 public interface NeedLiteHolder {
     NeedLitePage holder(@NonNull LiteGeneralHolder holder);
+
+    NeedLitePage holder(@NonNull ViewGroup viewGroup);
 }

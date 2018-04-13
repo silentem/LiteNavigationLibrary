@@ -3,6 +3,7 @@ package com.whaletail.lite;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v4.util.Pair;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -28,12 +29,8 @@ public interface NeedLiteIcons {
                        @NonNull @DrawableRes Integer off,
                        LiteLayoutParamsListener liteLayoutParamsListener);
 
-    NeedLitePage icons(@NonNull @DrawableRes Integer on,
-                       @NonNull @DrawableRes Integer off,
-                       @NonNull ViewGroup layout,
-                       ImageView icon,
-                       LiteLayoutParamsListener liteLayoutParamsListener);
-
     NeedLitePage icon(@NonNull @DrawableRes Integer icon,
                       LiteLayoutParamsListener liteLayoutParamsListener);
+
+    NeedLitePage items(@NonNull View view);
 }
