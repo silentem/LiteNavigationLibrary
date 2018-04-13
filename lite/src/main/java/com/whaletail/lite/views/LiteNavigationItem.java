@@ -8,21 +8,22 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import static com.whaletail.lite.views.LiteNavigationItem.State.OFF;
+import static com.whaletail.lite.views.LiteNavigationItem.State.ON;
 
 /**
  * @author whaletail
  * @date 18.01.18.
  */
 
-public class LiteNavigationItem extends AppCompatImageView {
+public abstract class LiteNavigationItem extends FrameLayout {
 
     private State state = OFF;
-    @DrawableRes
-    private int on;
-    @DrawableRes
-    private int off;
 
     public LiteNavigationItem(@NonNull Context context) {
         super(context);
@@ -36,22 +37,32 @@ public class LiteNavigationItem extends AppCompatImageView {
         super(context, attrs, defStyleAttr);
     }
 
-    public LiteNavigationItem init(@DrawableRes int on, @DrawableRes int off) {
-        this.on = on;
-        this.off = off;
-        setImageResource(off);
+    public LiteNavigationItem init() {
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.gravity = Gravity.CENTER;
+        addView(getView(), layoutParams);
+        off();
         return this;
     }
 
+    protected abstract View getView();
 
-    public void on() {
-        setState(LiteNavigationItem.State.ON);
-        setImageResource(getOn());
+    public abstract void on(View view);
+
+    public abstract void off(View view);
+
+    public void on(){
+        if (getChildCount() > 0) {
+            on(getChildAt(0));
+            setState(ON);
+        }
     }
 
-    public void off() {
-        setState(LiteNavigationItem.State.OFF);
-        setImageResource(getOff());
+    public void off(){
+        if (getChildCount() > 0) {
+            off(getChildAt(0));
+            setState(OFF);
+        }
     }
 
     @Nullable
@@ -59,8 +70,6 @@ public class LiteNavigationItem extends AppCompatImageView {
     protected Parcelable onSaveInstanceState() {
         super.onSaveInstanceState();
         Bundle bundle = new Bundle();
-        bundle.putInt("on", on);
-        bundle.putInt("off", off);
         bundle.putSerializable("state", state);
         return bundle;
     }
@@ -68,18 +77,8 @@ public class LiteNavigationItem extends AppCompatImageView {
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
         Bundle bundle = (Bundle) state;
-        on = bundle.getInt("on");
-        off = bundle.getInt("off");
         this.state = (State) bundle.getSerializable("state");
         super.onRestoreInstanceState(state);
-    }
-
-    public int getOn() {
-        return on;
-    }
-
-    public int getOff() {
-        return off;
     }
 
     public State getState() {

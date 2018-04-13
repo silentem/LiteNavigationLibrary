@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.whaletail.lite.listeners.LiteFragmentListener;
 import com.whaletail.lite.listeners.LiteLayoutParamsListener;
@@ -84,39 +85,139 @@ public class Lite {
         }
 
         @Override
-        public NeedLitePage icons(@NonNull Integer on, @NonNull Integer off) {
+        public NeedLitePage icons(@NonNull final Integer on, @NonNull final Integer off) {
             if (views == null) views = new ArrayList<>();
-            views.add(new LiteNavigationItem(context).init(on, off));
+            views.add(new LiteNavigationItem(context) {
+
+                        @Override
+                        protected View getView() {
+                            return new ImageView(context);
+                        }
+
+                        @Override
+                        public void on(View view) {
+                            if (view instanceof ImageView) {
+                                ((ImageView) view).setImageResource(on);
+                            }
+                        }
+
+                        @Override
+                        public void off(View view) {
+                            if (view instanceof ImageView) {
+                                ((ImageView) view).setImageResource(off);
+                            }
+                        }
+                    }.init());
             return this;
         }
 
         @Override
-        public NeedLitePage icons(@NonNull Pair<Integer, Integer> icons) {
+        public NeedLitePage icons(@NonNull final Pair<Integer, Integer> icons) {
             if (views == null) views = new ArrayList<>();
-            views.add(new LiteNavigationItem(context).init(icons.first, icons.second));
+            views.add(new LiteNavigationItem(context) {
+
+                        @Override
+                        protected View getView() {
+                            return new ImageView(context);
+                        }
+
+                        @Override
+                        public void on(View view) {
+                            if (view instanceof ImageView) {
+                                ((ImageView) view).setImageResource(icons.first);
+                            }
+                        }
+
+                        @Override
+                        public void off(View view) {
+                            if (view instanceof ImageView) {
+                                ((ImageView) view).setImageResource(icons.second);
+                            }
+                        }
+                    }.init());
             return this;
         }
 
         @Override
-        public NeedLitePage icon(@NonNull Integer icon) {
+        public NeedLitePage icon(@NonNull final Integer icon) {
             if (views == null) views = new ArrayList<>();
-            views.add(new LiteNavigationItem(context).init(icon, icon));
+            views.add(new LiteNavigationItem(context) {
+
+                        @Override
+                        protected View getView() {
+                            return new ImageView(context);
+                        }
+
+                        @Override
+                        public void on(View view) {
+                            if (view instanceof ImageView) {
+                                ((ImageView) view).setImageResource(icon);
+                            }
+                        }
+
+                        @Override
+                        public void off(View view) {
+                            if (view instanceof ImageView) {
+                                ((ImageView) view).setImageResource(icon);
+                            }
+                        }
+                    }.init());
             return this;
         }
 
         @Override
-        public NeedLitePage icons(@NonNull Pair<Integer, Integer> icons, @NonNull LiteLayoutParamsListener listener) {
+        public NeedLitePage icons(@NonNull final Pair<Integer, Integer> icons, @NonNull LiteLayoutParamsListener listener) {
             if (views == null) views = new ArrayList<>();
-            LiteNavigationItem item = new LiteNavigationItem(context).init(icons.first, icons.second);
+            LiteNavigationItem item = new LiteNavigationItem(context) {
+
+                @Override
+                protected View getView() {
+                    return new ImageView(context);
+                }
+
+                @Override
+                public void on(View view) {
+                    if (view instanceof ImageView) {
+                        ((ImageView) view).setImageResource(icons.first);
+                    }
+                }
+
+                @Override
+                public void off(View view) {
+                    if (view instanceof ImageView) {
+                        ((ImageView) view).setImageResource(icons.second);
+                    }
+                }
+            }.init();
             item.setLayoutParams(listener.getLayoutParams());
             views.add(item);
             return this;
         }
 
         @Override
-        public NeedLitePage icons(@NonNull Integer on, @NonNull Integer off, LiteLayoutParamsListener listener) {
+        public NeedLitePage icons(@NonNull final Integer on, @NonNull final Integer off, LiteLayoutParamsListener listener) {
             if (views == null) views = new ArrayList<>();
-            LiteNavigationItem item = new LiteNavigationItem(context).init(on, off);
+            LiteNavigationItem item = new LiteNavigationItem(context) {
+
+                @Override
+                protected View getView() {
+                    return new ImageView(context);
+                }
+
+                @Override
+                public void on(View view) {
+                    if (view instanceof ImageView) {
+                        ((ImageView) view).setImageResource(on);
+                    }
+                }
+
+                @Override
+                public void off(View view) {
+                    if (view instanceof ImageView) {
+                        ((ImageView) view).setImageResource(off);
+                    }
+                }
+            }.init();
             item.setLayoutParams(listener.getLayoutParams());
             views.add(item);
             return this;
@@ -124,20 +225,40 @@ public class Lite {
 
 
         @Override
-        public NeedLitePage icon(@NonNull Integer icon, @NonNull LiteLayoutParamsListener listener) {
+        public NeedLitePage icon(@NonNull final Integer icon, @NonNull LiteLayoutParamsListener listener) {
             if (views == null) views = new ArrayList<>();
-            LiteNavigationItem item = new LiteNavigationItem(context).init(icon, icon);
+            LiteNavigationItem item = new LiteNavigationItem(context) {
+
+                @Override
+                protected View getView() {
+                    return new ImageView(context);
+                }
+
+                @Override
+                public void on(View view) {
+                    if (view instanceof ImageView) {
+                        ((ImageView) view).setImageResource(icon);
+                    }
+                }
+
+                @Override
+                public void off(View view) {
+                    if (view instanceof ImageView) {
+                        ((ImageView) view).setImageResource(icon);
+                    }
+                }
+            }.init();
             item.setLayoutParams(listener.getLayoutParams());
             views.add(item);
             return this;
         }
 
         @Override
-        public NeedLitePage item(@NonNull View view) {
+        public NeedLitePage item(@NonNull LiteNavigationItem item) {
             if (views == null) {
                 views = new ArrayList<>();
             }
-            views.add(view);
+            views.add(item.init());
             return this;
         }
 
@@ -216,12 +337,12 @@ public class Lite {
                 return;
             }
             if (liteFragmentListener.checkBeforeGetFragment(position)) {
-                if (onAllClickListener != null) {
-                    onAllClickListener.onAllClick();
-                }
                 manager.beginTransaction()
                         .replace(holder.getId(), liteFragmentListener.getFragment())
                         .commit();
+                if (onAllClickListener != null) {
+                    onAllClickListener.onAllClick();
+                }
             }
         }
 

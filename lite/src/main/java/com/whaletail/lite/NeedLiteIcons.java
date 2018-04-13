@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.whaletail.lite.listeners.LiteLayoutParamsListener;
+import com.whaletail.lite.views.LiteNavigationItem;
 
 /**
  * @author whaletail
@@ -32,5 +33,5 @@ public interface NeedLiteIcons {
     NeedLitePage icon(@NonNull @DrawableRes Integer icon,
                       LiteLayoutParamsListener liteLayoutParamsListener);
 
-    NeedLitePage item(@NonNull View view);
+    NeedLitePage item(@NonNull LiteNavigationItem item);
 }
