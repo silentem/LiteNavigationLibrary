@@ -241,9 +241,11 @@ public class Lite {
                     switch (item.getState()) {
                         case ON: {
                             item.off();
+                            break;
                         }
                         case OFF: {
                             item.on();
+                            break;
                         }
                     }
                 }

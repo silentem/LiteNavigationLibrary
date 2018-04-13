@@ -45,7 +45,7 @@ public class LiteBottomNavigator extends LinearLayout {
             }
             LinearLayout.LayoutParams layoutParams = (LayoutParams) item.getLayoutParams();
             if (layoutParams == null) {
-                layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, weight);
+                layoutParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, weight);
                 layoutParams.gravity = Gravity.CENTER;
             }
             addView(item, layoutParams);
