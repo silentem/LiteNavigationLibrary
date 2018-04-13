@@ -4,8 +4,8 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import java.util.List;
@@ -43,9 +43,10 @@ public class LiteBottomNavigator extends LinearLayout {
                 Log.e(TAG, "LiteBottomNavigator view item is null on position " + i);
                 continue;
             }
-            ViewGroup.LayoutParams layoutParams = item.getLayoutParams();
+            LinearLayout.LayoutParams layoutParams = (LayoutParams) item.getLayoutParams();
             if (layoutParams == null) {
                 layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, weight);
+                layoutParams.gravity = Gravity.CENTER;
             }
             addView(item, layoutParams);
         }
