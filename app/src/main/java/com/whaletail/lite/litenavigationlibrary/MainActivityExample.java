@@ -33,26 +33,11 @@ public class MainActivityExample extends AppCompatActivity {
                 .navigator(bottom)
                 .holder(viewPager)
                 .page(new LiteFragment())
-                .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round, new LiteLayoutParamsListener() {
-                    @Override
-                    public RelativeLayout.LayoutParams getLayoutParams() {
-                        return new RelativeLayout.LayoutParams(50, 50);
-                    }
-                })
+                .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
                 .page(new LiteFragment())
-                .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round, new LiteLayoutParamsListener() {
-                    @Override
-                    public RelativeLayout.LayoutParams getLayoutParams() {
-                        return new RelativeLayout.LayoutParams(100, 100);
-                    }
-                })
+                .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
                 .page(new LiteFragment())
-                .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round, new LiteLayoutParamsListener() {
-                    @Override
-                    public RelativeLayout.LayoutParams getLayoutParams() {
-                        return new RelativeLayout.LayoutParams(200, 200);
-                    }
-                })
+                .icons(R.mipmap.ic_launcher_round, R.mipmap.ic_launcher_round)
                 .allClickListener(new OnAllClickListener() {
                     @Override
                     public void onAllClick() {

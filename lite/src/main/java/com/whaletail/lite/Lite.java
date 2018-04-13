@@ -133,7 +133,7 @@ public class Lite {
         }
 
         @Override
-        public NeedLitePage items(@NonNull View view) {
+        public NeedLitePage item(@NonNull View view) {
             if (views == null) {
                 views = new ArrayList<>();
             }

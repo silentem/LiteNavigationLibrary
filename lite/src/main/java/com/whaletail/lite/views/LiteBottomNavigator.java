@@ -36,6 +36,7 @@ public class LiteBottomNavigator extends LinearLayout {
             Log.e(TAG, "LiteBottomNavigator must have item views");
             return;
         }
+        float weight = 1F / views.size();
         for (int i = 0; i < views.size(); i++) {
             View item = views.get(i);
             if (item == null) {
@@ -43,11 +44,10 @@ public class LiteBottomNavigator extends LinearLayout {
                 continue;
             }
             ViewGroup.LayoutParams layoutParams = item.getLayoutParams();
-            if (layoutParams != null) {
-                addView(item, layoutParams);
-            } else {
-                addView(item);
+            if (layoutParams == null) {
+                layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, weight);
             }
+            addView(item, layoutParams);
         }
     }
 }

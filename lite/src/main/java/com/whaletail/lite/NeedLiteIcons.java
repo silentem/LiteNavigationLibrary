@@ -32,5 +32,5 @@ public interface NeedLiteIcons {
     NeedLitePage icon(@NonNull @DrawableRes Integer icon,
                       LiteLayoutParamsListener liteLayoutParamsListener);
 
-    NeedLitePage items(@NonNull View view);
+    NeedLitePage item(@NonNull View view);
 }
