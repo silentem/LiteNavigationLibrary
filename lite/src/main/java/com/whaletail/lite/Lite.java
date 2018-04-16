@@ -47,7 +47,7 @@ public class Lite {
 
         private int startPosition = 0;
 
-        private List<View> views;
+        private List<LiteNavigationItem> views;
 
         private List<LiteFragmentListener> listeners;
 
@@ -89,25 +89,25 @@ public class Lite {
             if (views == null) views = new ArrayList<>();
             views.add(new LiteNavigationItem(context) {
 
-                        @Override
-                        protected View getView() {
-                            return new ImageView(context);
-                        }
+                @Override
+                protected View getView() {
+                    return new ImageView(context);
+                }
 
-                        @Override
-                        public void on(View view) {
-                            if (view instanceof ImageView) {
-                                ((ImageView) view).setImageResource(on);
-                            }
-                        }
+                @Override
+                public void on(View view) {
+                    if (view instanceof ImageView) {
+                        ((ImageView) view).setImageResource(on);
+                    }
+                }
 
-                        @Override
-                        public void off(View view) {
-                            if (view instanceof ImageView) {
-                                ((ImageView) view).setImageResource(off);
-                            }
-                        }
-                    }.init());
+                @Override
+                public void off(View view) {
+                    if (view instanceof ImageView) {
+                        ((ImageView) view).setImageResource(off);
+                    }
+                }
+            }.init());
             return this;
         }
 
@@ -116,25 +116,25 @@ public class Lite {
             if (views == null) views = new ArrayList<>();
             views.add(new LiteNavigationItem(context) {
 
-                        @Override
-                        protected View getView() {
-                            return new ImageView(context);
-                        }
+                @Override
+                protected View getView() {
+                    return new ImageView(context);
+                }
 
-                        @Override
-                        public void on(View view) {
-                            if (view instanceof ImageView) {
-                                ((ImageView) view).setImageResource(icons.first);
-                            }
-                        }
+                @Override
+                public void on(View view) {
+                    if (view instanceof ImageView) {
+                        ((ImageView) view).setImageResource(icons.first);
+                    }
+                }
 
-                        @Override
-                        public void off(View view) {
-                            if (view instanceof ImageView) {
-                                ((ImageView) view).setImageResource(icons.second);
-                            }
-                        }
-                    }.init());
+                @Override
+                public void off(View view) {
+                    if (view instanceof ImageView) {
+                        ((ImageView) view).setImageResource(icons.second);
+                    }
+                }
+            }.init());
             return this;
         }
 
@@ -143,25 +143,25 @@ public class Lite {
             if (views == null) views = new ArrayList<>();
             views.add(new LiteNavigationItem(context) {
 
-                        @Override
-                        protected View getView() {
-                            return new ImageView(context);
-                        }
+                @Override
+                protected View getView() {
+                    return new ImageView(context);
+                }
 
-                        @Override
-                        public void on(View view) {
-                            if (view instanceof ImageView) {
-                                ((ImageView) view).setImageResource(icon);
-                            }
-                        }
+                @Override
+                public void on(View view) {
+                    if (view instanceof ImageView) {
+                        ((ImageView) view).setImageResource(icon);
+                    }
+                }
 
-                        @Override
-                        public void off(View view) {
-                            if (view instanceof ImageView) {
-                                ((ImageView) view).setImageResource(icon);
-                            }
-                        }
-                    }.init());
+                @Override
+                public void off(View view) {
+                    if (view instanceof ImageView) {
+                        ((ImageView) view).setImageResource(icon);
+                    }
+                }
+            }.init());
             return this;
         }
 
@@ -275,7 +275,7 @@ public class Lite {
         }
 
 
-        private void setOnClickListenersToItems(@NonNull List<View> views) {
+        private void setOnClickListenersToItems(@NonNull List<LiteNavigationItem> views) {
             for (int i = 0; i < views.size(); i++) {
                 View view = views.get(i);
                 view.setOnClickListener(new BaseLiteOnClickListener(i));
@@ -283,7 +283,7 @@ public class Lite {
             if (views.size() > startPosition) {
                 setPosition(startPosition);
                 View view = views.get(startPosition);
-                if (view instanceof LiteNavigationItem) {
+                if (view != null) {
                     ((LiteNavigationItem) view).on();
                 }
             }
@@ -356,15 +356,15 @@ public class Lite {
 
             @Override
             public void onClick(View v) {
-                setPosition(position);
                 if (v instanceof LiteNavigationItem) {
                     LiteNavigationItem item = (LiteNavigationItem) v;
                     switch (item.getState()) {
                         case ON: {
-                            item.off();
                             break;
                         }
                         case OFF: {
+                            setPosition(position);
+                            navigator.setAllItemOff();
                             item.on();
                             break;
                         }

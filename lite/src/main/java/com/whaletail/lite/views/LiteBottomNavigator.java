@@ -31,7 +31,7 @@ public class LiteBottomNavigator extends LinearLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    public void init(List<View> views) {
+    public void init(List<LiteNavigationItem> views) {
         if (views == null) {
             Log.e(TAG, "LiteBottomNavigator must have item views");
             return;
@@ -51,4 +51,14 @@ public class LiteBottomNavigator extends LinearLayout {
             addView(item, layoutParams);
         }
     }
+
+    public void setAllItemOff() {
+        for (int i = 0; i < getChildCount(); i++) {
+            if (getChildAt(i) instanceof LiteNavigationItem) {
+                LiteNavigationItem item = (LiteNavigationItem) getChildAt(i);
+                item.off();
+            }
+        }
+    }
+
 }

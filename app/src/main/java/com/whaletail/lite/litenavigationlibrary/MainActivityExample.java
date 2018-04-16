@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.whaletail.lite.Lite;
 import com.whaletail.lite.listeners.OnAllClickListener;
@@ -47,6 +50,7 @@ public class MainActivityExample extends AppCompatActivity {
                     @Override
                     public void on(View view) {
                         if (view instanceof ImageView) {
+                            view.setLayoutParams(new FrameLayout.LayoutParams(100, 100));
                             ((ImageView) view).setImageResource(R.mipmap.ic_launcher_round);
                         }
                     }
@@ -54,6 +58,7 @@ public class MainActivityExample extends AppCompatActivity {
                     @Override
                     public void off(View view) {
                         if (view instanceof ImageView) {
+                            view.setLayoutParams(new FrameLayout.LayoutParams(50, 50));
                             ((ImageView) view).setImageResource(R.mipmap.ic_launcher_round);
                         }
                     }
