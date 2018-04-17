@@ -1,4 +1,4 @@
-# Lite Navigation Library
+# Lite Navigation Library (unsupported)
 
 # How to use
 1) Add library via dependency
